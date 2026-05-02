@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Type Convert</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Convert Images</h1>
+      <p class="subtitle">Upload one or more images and convert them to your target format.</p>
+
+      <form id="convert-form" class="card">
+        <label for="image-input">Select images</label>
+        <input id="image-input" name="images" type="file" accept="image/*" multiple required />
+        <label for="format-select">Output format</label>
+        <select id="format-select" name="outputFormat" required>
+          <option value="webp">webp</option>
+          <option value="jpeg">jpeg</option>
+          <option value="png">png</option>
+          <option value="avif">avif</option>
+          <option value="tiff">tiff</option>
+        </select>
+        <button id="submit-btn" type="submit">Convert (Zip)</button>
+      </form>
+
+      <p id="status" class="status"></p>
+    </main>
+    <script src="app.js"></script>
+  </body>
+  </html>
