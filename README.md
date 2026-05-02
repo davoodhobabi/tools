@@ -42,8 +42,8 @@ After adding a tool, append it to the `tools` array in `registry.ts` and link it
 
 ## Current tools
 
-| Tool | Web path | Summary |
-|------|----------|---------|
+| Tool               | Web path              | Summary                                                                 |
+| ------------------ | --------------------- | ----------------------------------------------------------------------- |
 | Image Type Convert | `/image-type-convert` | Upload multiple images, convert to a chosen format, download as one ZIP |
 
 ### Image Type Convert
