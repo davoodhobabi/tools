@@ -42,9 +42,10 @@ After adding a tool, append it to the `tools` array in `registry.ts` and link it
 
 ## Current tools
 
-| Tool               | Web path              | Summary                                                                 |
-| ------------------ | --------------------- | ----------------------------------------------------------------------- |
-| Image Type Convert | `/image-type-convert` | Upload multiple images, convert to a chosen format, download as one ZIP |
+| Tool                 | Web path                  | Summary                                                                                         |
+| -------------------- | ------------------------- | ----------------------------------------------------------------------------------------------- |
+| Image Type Convert   | `/image-type-convert`     | Upload multiple images, convert to a chosen format, download as one ZIP                        |
+| Image Smart Compress | `/image-smart-compress`   | One image: same format as source, proportional size % + quality → estimate, confirm, download   |
 
 ### Image Type Convert
 
@@ -53,6 +54,13 @@ After adding a tool, append it to the `tools` array in `registry.ts` and link it
 - **POST** `/image-type-convert/api/convert` — multipart form with `outputFormat` and image files; per-request upload limit ~25 MB
 
 Supported output formats: `jpeg`, `png`, `webp`, `avif`, `tiff` (`jpg` is normalized to `jpeg`).
+
+### Image Smart Compress
+
+- **GET** `/image-smart-compress` — UI
+- **GET** `/image-smart-compress/health` — health check (`{ "ok": true }`)
+- **POST** `/image-smart-compress/api/preview` — multipart: field `image`, `scalePercent` (10–200, scales width and height together), `quality` (1–100). Output format is inferred from the source image (jpeg, png, webp, avif, gif, tiff, heif; unknown raster types fall back to png). Returns JSON with sizes, dimensions, `format`, and `previewDataUrl` (a `data:` URL of the encoded output when it is ≤ 3 MB, otherwise `null`).
+- **POST** `/image-smart-compress/api/export` — same fields as preview; response body is the encoded image file (same settings as a fresh encode).
 
 ## CLI batch conversion
 

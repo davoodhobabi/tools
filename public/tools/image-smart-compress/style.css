@@ -1,0 +1,181 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fb;
+  color: #111827;
+}
+
+.container {
+  max-width: 640px;
+  margin: 64px auto;
+  padding: 0 16px;
+}
+
+h1 {
+  margin: 0 0 8px;
+}
+
+h2 {
+  margin: 0 0 12px;
+  font-size: 1.05rem;
+}
+
+.subtitle {
+  margin: 0 0 24px;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  display: grid;
+  gap: 12px;
+}
+
+label {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+input[type="file"],
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #fff;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+.range-value {
+  font-size: 13px;
+  color: #374151;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 11px 14px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}
+
+#download-btn:not(:disabled) {
+  background: #059669;
+}
+
+.preview {
+  margin-top: 20px;
+  padding: 16px 18px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.preview.hidden {
+  display: none;
+}
+
+.preview-figure {
+  margin: 16px 0 0;
+}
+
+.preview-figure.hidden {
+  display: none;
+}
+
+.preview-figure figcaption {
+  margin-bottom: 8px;
+}
+
+.preview-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.preview-too-large {
+  margin-top: 12px;
+}
+
+.preview-too-large.hidden {
+  display: none;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 0;
+}
+
+.stats dt {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+}
+
+.stats dd {
+  margin: 4px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.muted {
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.small {
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+.warning {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  background: #fef3c7;
+  border: 1px solid #fcd34d;
+  border-radius: 8px;
+  color: #92400e;
+  font-size: 14px;
+}
+
+.warning.hidden {
+  display: none;
+}
+
+.status {
+  margin-top: 14px;
+  min-height: 20px;
+  color: #1f2937;
+}

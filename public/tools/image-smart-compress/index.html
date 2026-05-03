@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Smart Compress</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Smart compress</h1>
+      <p class="subtitle">
+        The file keeps its original image type. Use the size slider to scale width and height together (same aspect
+        ratio). Adjust quality, estimate the new file size, then download if it looks good.
+      </p>
+
+      <form id="compress-form" class="card">
+        <label for="image-input">Image</label>
+        <input id="image-input" name="image" type="file" accept="image/*" required />
+
+        <label for="scale-percent">Size (% of original width &amp; height)</label>
+        <input id="scale-percent" name="scalePercent" type="range" min="10" max="200" value="100" step="1" />
+        <div class="range-value"><span id="scale-value">100</span>% · same ratio for width and height</div>
+
+        <label for="quality">Quality</label>
+        <input id="quality" name="quality" type="range" min="1" max="100" value="82" />
+        <div class="range-value"><span id="quality-value">82</span> / 100</div>
+
+        <div class="actions">
+          <button id="estimate-btn" type="button">Estimate size</button>
+          <button id="download-btn" type="button" disabled>Download optimized</button>
+        </div>
+      </form>
+
+      <section id="preview-panel" class="preview hidden" aria-live="polite">
+        <h2>Preview</h2>
+        <dl class="stats">
+          <div>
+            <dt>Original</dt>
+            <dd id="stat-original-size">—</dd>
+            <dd id="stat-original-dims" class="muted">—</dd>
+          </div>
+          <div>
+            <dt>Estimated output</dt>
+            <dd id="stat-estimated-size">—</dd>
+            <dd id="stat-output-dims" class="muted">—</dd>
+          </div>
+        </dl>
+        <figure id="preview-figure" class="preview-figure hidden">
+          <figcaption class="muted small">Converted preview</figcaption>
+          <img id="preview-image" class="preview-image" alt="Compressed preview" />
+        </figure>
+        <p id="preview-too-large" class="muted small preview-too-large hidden">
+          Preview image is hidden because the output is larger than 3 MB (browser limit). Stats above still match the
+          file you will download.
+        </p>
+        <p id="stat-warning" class="warning hidden"></p>
+        <p class="muted small">Download uses the same settings as this estimate.</p>
+      </section>
+
+      <p id="status" class="status"></p>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
