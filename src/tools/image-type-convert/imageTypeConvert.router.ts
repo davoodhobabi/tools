@@ -3,6 +3,7 @@ import multer from "multer";
 import archiver = require("archiver");
 import type { ConvertRequest, UploadedImage } from "./imageTypeConvert.type.js";
 import { convertImages, normalizeFormat } from "./imageTypeConvert.logical.js";
+import { isAcceptedRasterImage } from "../rasterUpload.logical.js";
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -15,9 +16,7 @@ router.post("/api/convert", upload.any(), async (req, res) => {
   try {
     const request = req as ConvertRequest;
     const allFiles = request.files;
-    const files: UploadedImage[] = Array.isArray(allFiles)
-      ? allFiles.filter((file) => file.mimetype.startsWith("image/"))
-      : [];
+    const files: UploadedImage[] = Array.isArray(allFiles) ? allFiles.filter((file) => isAcceptedRasterImage(file)) : [];
 
     if (files.length === 0) {
       res.status(400).json({ message: "No image files provided." });

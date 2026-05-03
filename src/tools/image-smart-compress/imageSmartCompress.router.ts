@@ -1,6 +1,7 @@
 import { Router } from "express";
 import multer from "multer";
 import type { CompressRequest } from "./imageSmartCompress.type.js";
+import { isAcceptedRasterImage, resolveImageMimeForSharp } from "../rasterUpload.logical.js";
 import {
   contentTypeForFormat,
   fileExtensionForFormat,
@@ -21,15 +22,16 @@ router.post("/api/preview", upload.single("image"), async (req, res) => {
   try {
     const request = req as CompressRequest;
     const file = request.file;
-    if (!file || !file.mimetype.startsWith("image/")) {
+    if (!file || !isAcceptedRasterImage(file)) {
       res.status(400).json({ message: "No image file provided." });
       return;
     }
 
     const scalePercent = parseScalePercent(request.body?.scalePercent);
     const quality = parseQuality(request.body?.quality);
+    const mimeForSharp = resolveImageMimeForSharp(file);
 
-    const summary = await previewCompressed(file.buffer, { scalePercent, quality }, file.mimetype);
+    const summary = await previewCompressed(file.buffer, { scalePercent, quality }, mimeForSharp);
 
     res.json(summary);
   } catch (error) {
@@ -42,15 +44,16 @@ router.post("/api/export", upload.single("image"), async (req, res) => {
   try {
     const request = req as CompressRequest;
     const file = request.file;
-    if (!file || !file.mimetype.startsWith("image/")) {
+    if (!file || !isAcceptedRasterImage(file)) {
       res.status(400).json({ message: "No image file provided." });
       return;
     }
 
     const scalePercent = parseScalePercent(request.body?.scalePercent);
     const quality = parseQuality(request.body?.quality);
+    const mimeForSharp = resolveImageMimeForSharp(file);
 
-    const result = await optimizeImage(file.buffer, { scalePercent, quality }, file.mimetype);
+    const result = await optimizeImage(file.buffer, { scalePercent, quality }, mimeForSharp);
 
     const ext = fileExtensionForFormat(result.format);
     const base = file.originalname.replace(/\.[^/.]+$/, "").trim() || "optimized";
